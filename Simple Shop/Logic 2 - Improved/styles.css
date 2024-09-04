@@ -1,0 +1,59 @@
+/* Container for the introduction section */
+.container {
+    display: block;
+    text-align: center;
+}
+
+/* Style for the fieldset containing user information */
+.info-fieldset {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 20px;
+    display: inline-block;
+    text-align: left;
+}
+
+/* Style for the legend element inside the fieldset */
+.info-fieldset legend {
+    font-size: 20px;
+    color: brown;
+}
+
+/* Style for labels within the fieldset */
+.info-fieldset label {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+/* Style for input elements within the fieldset */
+.info-fieldset input {
+    margin-bottom: 10px;
+}
+
+/* Style for the product list section */
+.product-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Style for buttons in the product list */
+.product-list button {
+    margin: 5px;
+}
+
+/* Style for buttons within the fieldset */
+.info-fieldset button {
+    margin: 5px;
+}
+
+/* Style for the selected product display */
+#selected-product {
+    border: solid 2px black;
+    padding: 5px;
+}
+
+/* Center text alignment */
+.centered-text {
+    text-align: center;
+}

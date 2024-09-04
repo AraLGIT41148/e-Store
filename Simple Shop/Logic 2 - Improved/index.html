@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>e-Store</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to the CSS file -->
+</head>
+<body>
+
+    <!-- Login Section -->
+    <div id="introduction" class="container">
+        <p style="font-size: 50px;">Welcome to e-Store</p>
+        <p>Please Login to the store and enjoy purchasing from home.</p>
+        
+        <fieldset class="info-fieldset">
+            <legend>Information</legend>
+            <label for="name">Name:</label>
+            <input type="text" placeholder="">
+            <button onclick="showName()">Forget name</button>
+            <br>
+            <label for="password">Pass:</label>
+            <input type="password" placeholder="">
+            <button onclick="showPassword()">Forget password</button>
+            <br>
+            <label for="security-code">Code:</label>
+            <input type="text" placeholder="Security code below ↓">
+            <br>
+            <button onclick="submit()">Submit Information</button>
+            <p>🅰️4️1️🅱️🅾️8️</p>
+        </fieldset>
+        <p id="notice" style="color: red;"></p>
+    </div>
+
+    <!-- Product Selection Page -->
+    <div id="selecting_page" style="display: none;">
+        <h2 id="Cname"></h2>
+        <p>^^^^^^^^^^^^^^</p>
+        <p>Total cost: <span>0</span>$</p>
+
+        <details>
+            <summary style="font-size: 20px; margin: 0 0 20px 0;">
+                Number of choices: <span id="n_products">0</span>
+            </summary>
+            <div id="container">
+                <p id="selected-product">Your products → </p>
+            </div>
+        </details>
+
+        <div class="product-list">
+            <button onclick="select(chips)">Chips</button> <p id="chips">5$</p><br>
+            <button onclick="select(sooda)">Sooda</button> <p id="sooda">7$</p>
+            <button onclick="select(chocolate)">Chocolate</button> <p id="chocolate">3$</p><br>
+            <button onclick="select(lolipop)">Lolipop</button> <p id="lolipop">1$</p>
+        </div>
+        <p>-------------</p>
+        <div class="centered-text">
+            <button ondblclick="choosed()">I choosed</button>
+            <p style="margin: 3px 0px 0px 10px; font-size: 10px;">Please double click</p>
+        </div>
+    </div>
+
+    <!-- Payment Page -->
+    <div id="payment" style="display: none;">
+        <p id="final-cost" style="font-size: 50px;"></p>
+        <p id="customerCash" style="font-size: 50px;"></p>
+        <button onclick="purchase()">Pay</button>
+        <div id="removeProduct" style="display: none;">
+            <p id="1" onclick="unselect(1)"></p>
+            <p id="2" onclick="unselect(2)"></p>
+            <p id="3" onclick="unselect(3)"></p>
+            <p id="4" onclick="unselect(4)"></p>
+        </div>
+    </div>
+
+    <!-- Finish Page -->
+    <div id="finish-page" style="display: none;" class="centered-text">
+        <p style="color: green; font-size: 100px;">Purchasing Successful</p>
+    </div>
+
+    <script src="script.js"></script> <!-- Link to the JavaScript file -->
+</body>
+</html>

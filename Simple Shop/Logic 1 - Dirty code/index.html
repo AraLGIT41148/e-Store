@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+
+
+<div style="display: block; text-align: center;" id="introduction">
+<p style="font-size: 50px;">Welcome to e-Store</p>
+<p>please sign in to join store and enjoy purchasing from home</p>
+
+
+<fieldset>
+<legend style="font-size: 20px; color: brown;">information</legend>
+<label for="name" style="margin-left: 90px;">Name:</label>
+<input type="text" placeholder="">
+<button onclick="showName()"> Forget name </button>
+<br>
+<label for="password" style="margin-left: 120px;">Pass:</label>
+<input type="password" placeholder="">
+<button onclick="showPassword()"> Forget password </button>
+<br>
+<label for="security-code">Code:</label>
+<input type="text" placeholder="security code in below ↓">
+<br>
+<button onclick="submit()">submit information</button>
+<p style="margin: 0 0 0 0;">🅰️4️1️🅱️🅾️8️<p>
+</fieldset>
+<p style="color: red;" id="notice"></p>
+
+
+</div>
+
+
+
+
+
+<div style="display: none;" id="selecting_page">
+<h2 id="Cname"></h2>
+<p>^^^^^^^^^^^^^^</p>
+<p>Total cost: <span>0</span>$</p>
+
+<details>
+<summary style="font-size: 20px; margin: 0 0 20px 0;">number of choice: <span id="n_products">0</span></summary>
+<div id="container">
+<p style="border: solid 2px black; padding: 5px 5px 5px 5px;" id="selected-product">your products → </p>
+</div>
+</details>
+
+<button onclick="select(chips)">chips</button> <p id="chips">5$</p><br>
+<button onclick="select(sooda)">sooda</button> <p id="sooda">7$</p>
+<button onclick="select(chocolate)">chocoloate</button> <p id="chocolate">3$</p><br>
+<button onclick="select(lolipop)">lolipop</button> <p id="lolipop">1$</p>
+<p>-------------</p>
+<div style="display: flex; flex-direction: row;"><button ondblclick="choosed()">I choosed</button><p style="margin: 3px 0px 0px 10px; font-size: 10px;">please double click</p></div>
+</div>
+
+
+
+
+<div style="display: none;" id="payment">
+<p style="font-size: 50px;" id="final-cost"></p>
+<p style="font-size: 50px;" id="customerCash"></p>
+<button onclick="purchase()">pay</button>
+<div style="display: none;" id="removeProduct">
+<p id=1 onclick="unselect(1)"></p>
+<p id=2 onclick="unselect(2)"></p>
+<p id=3 onclick="unselect(3)"></p>
+<p id=4 onclick="unselect(4)"></p>
+</div>
+</div>
+
+<div style="display: none; text-align: center;" id="finish-page">
+<p style="color: green; font-size: 100px;">purchasing succesfull</p>
+</div>
+
+
+
+
+
+<script>
+
+let customerName = "Arnorld";
+let password = "1234";
+let securityCode = "A41BO8";
+
+function showName()
+{
+document.querySelectorAll("input")[0].placeholder = customerName;
+}
+
+function showPassword()
+{
+document.querySelectorAll("input")[1].placeholder = password;
+}
+
+function submit()
+{
+inputName = document.querySelectorAll("input")[0].value;
+inputPassword = document.querySelectorAll("input")[1].value;
+inputSecurityCode = document.querySelectorAll("input")[2].value;;
+
+if (customerName === inputName) {
+if (password === inputPassword) {
+if (securityCode === inputSecurityCode) {
+document.getElementById("introduction").style.display = "none";
+document.getElementById("selecting_page").style.display = "block";
+document.getElementById("Cname").innerHTML = customerName;
+}
+else {document.getElementById("notice").innerHTML = "wrong securityCode";}
+}
+else {document.getElementById("notice").innerHTML = "wrong password";}
+}
+else {document.getElementById("notice").innerHTML = "wrong name";}
+
+}
+
+
+
+
+
+let chips = {name: "chips", price: 5};
+let sooda = {name: "sooda", price: 7};
+let chocolate = {name: "chocolate", price: 3};
+let lolipop = {name: "lolipop", price: 1};
+let basket = [];
+
+function select(product) {
+if (!basket.includes(product)) {
+document.getElementById(product.name).innerHTML = "selected";
+basket.push(product);
+document.getElementById("n_products").innerHTML = basket.length;
+
+let basketProductsPrice = basket.map(function(el){return el.price;});
+let total_cost = basketProductsPrice.reduce(function(prev,curr){return prev + curr;});
+document.querySelector("span").innerHTML = total_cost;
+
+
+document.getElementById("selected-product").innerHTML += (product.name + " | ");
+document.getElementById(product.name).setAttribute("id","none");
+                                }
+}
+
+
+let cash = 0;
+
+function choosed()
+{
+for (let i = 1; i <= 4; i++) {document.querySelectorAll("button")[i].setAttribute("onclick","none()");}
+document.getElementById("selecting_page").setAttribute("style","display: none;");
+document.getElementById("payment").setAttribute("style","display: block; text-align: center;");
+document.getElementById("final-cost").innerHTML = "cost: " + document.querySelector("span").innerHTML + "$";
+let rand = Math.random(); cash = Math.floor((rand * 16) + 1); document.getElementById("customerCash").innerHTML = "cash: " + cash + "$";
+for (let i = 0; i < basket.length; i++) {
+document.getElementById(i+1).innerHTML = basket[i].name;
+                                         }
+}
+
+
+function unselect(place)
+{
+document.getElementById(place).setAttribute("style","color: red;");
+if (document.getElementById(place).innerHTML === "chips" && basket.includes(chips))     {document.getElementById("final-cost").innerHTML = "cost: " + (Math.floor(document.querySelector("span").innerHTML) - chips.price) + "$";         document.querySelector("span").innerHTML -= chips.price;}
+if (document.getElementById(place).innerHTML === "sooda" && basket.includes(sooda))     {document.getElementById("final-cost").innerHTML = "cost: " + (Math.floor(document.querySelector("span").innerHTML) - sooda.price) + "$";         document.querySelector("span").innerHTML -= sooda.price;}
+if (document.getElementById(place).innerHTML === "chocolate" && basket.includes(chocolate)) {document.getElementById("final-cost").innerHTML = "cost: " + (Math.floor(document.querySelector("span").innerHTML) - chocolate.price) + "$"; document.querySelector("span").innerHTML -= chocolate.price;}
+if (document.getElementById(place).innerHTML === "lolipop" && basket.includes(lolipop))   {document.getElementById("final-cost").innerHTML = "cost: " + (Math.floor(document.querySelector("span").innerHTML) - lolipop.price) + "$";     document.querySelector("span").innerHTML -= lolipop.price;}
+console.log(basket);
+}
+
+function purchase()
+{
+if (cash >= Math.floor(document.querySelector("span").innerHTML)) {document.getElementById("payment").style.display = "none"; document.getElementById("finish-page").style.display = "block";}
+else {document.getElementById("removeProduct").style.display = "block";}
+}
+
+
+
+</script>
+
+<div style="display: none;">
+<p>
+total_cost += product.price; <<<<another way to calculate the total cost>>>>
+
+document.querySelectorAll("p")[1].innerHTML = document.querySelectorAll("p")[1].innerHTML + product.name + " | "; <<<<another way to show selected product in basket>>>>
+
+document.getElementById(i+1).id = basket[i].name;
+
+         basket = basket.splice(place-1,place-1);
+
+document.querySelector("p").innerHTML
+document.querySelectorAll("div")[0].ondblclick = SH_price(chips);
+document.getElementById("n_product").innerHTML = Math.floor(document.getElementById("n_product").innerHTML) + 1;
+document.createElement("p").appendChild(document.createTextNode(product.name));
+document.getElementById("container").appendChild(document.createElement("p"));
+</p>
+
+function unselect(product)
+{
+document.getElementById(product.name).setAttribute("style","color: red;");
+}
+
+
+</div>
+
+
+</body>
+</html>

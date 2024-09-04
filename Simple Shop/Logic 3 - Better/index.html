@@ -1,0 +1,343 @@
+<!DOCTYPE html> <!-- Declaration defining this document as HTML5 -->
+<html lang="en"> <!-- Start of HTML document with language set to English -->
+<head>
+    <meta charset="UTF-8"> <!-- Character encoding set to UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Viewport settings for responsive design -->
+    <title>e-Store</title> <!-- Title of the webpage -->
+    <style>
+        /* Basic styles for the body */
+        body {
+            font-family: Arial, sans-serif; /* Set the font family */
+            margin: 0; /* Remove default margin */
+            padding: 0; /* Remove default padding */
+            background-color: #f4f4f4; /* Set background color */
+        }
+        /* Styles for the container */
+        .container {
+            display: flex; /* Use Flexbox layout */
+            flex-direction: column; /* Arrange items vertically */
+            align-items: center; /* Center items horizontally */
+            margin: 20px; /* Add margin around container */
+        }
+        /* Styles for the welcome text */
+        .welcome-text {
+            font-size: 50px; /* Set font size */
+            margin-bottom: 10px; /* Add space below the text */
+        }
+        /* Styles for the information fieldset */
+        .info-fieldset {
+            border: 1px solid #ccc; /* Add border with color */
+            padding: 20px; /* Add padding inside the fieldset */
+            border-radius: 8px; /* Round the corners of the border */
+            background-color: #fff; /* Set background color */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add shadow effect */
+        }
+        /* Styles for the legend inside the fieldset */
+        .info-fieldset legend {
+            font-size: 24px; /* Set font size */
+            color: #4a4a4a; /* Set text color */
+        }
+        /* Styles for labels inside the fieldset */
+        .info-fieldset label {
+            display: block; /* Display label as a block element */
+            margin: 10px 0 5px; /* Add margin around label */
+        }
+        /* Styles for input fields inside the fieldset */
+        .info-fieldset input {
+            padding: 10px; /* Add padding inside input */
+            width: 100%; /* Set input width to 100% of its container */
+            max-width: 300px; /* Limit maximum width */
+            margin-bottom: 15px; /* Add space below input */
+            border-radius: 40px; /* Round corners of the border */
+            border: 1px solid #ddd; /* Add border with color */
+        }
+        /* Styles for buttons inside the fieldset */
+        .info-fieldset button {
+            padding: 10px 20px; /* Add padding inside button */
+            border: none; /* Remove default border */
+            border-radius: 4px; /* Round corners of the border */
+            background-color: #007bff; /* Set background color */
+            color: white; /* Set text color */
+            cursor: pointer; /* Change cursor to pointer on hover */
+            margin-right: 10px; /* Add space to the right of button */
+        }
+        /* Button hover effect */
+        .info-fieldset button:hover {
+            background-color: #0056b3; /* Change background color on hover */
+        }
+        /* Styles for notice text */
+        .notice-text {
+            color: red; /* Set text color */
+            font-weight: bold; /* Make text bold */
+        }
+        /* Styles for the product list */
+        .product-list {
+            display: flex; /* Use Flexbox layout */
+            flex-direction: column; /* Arrange items vertically */
+            align-items: center; /* Center items horizontally */
+        }
+        /* Styles for product buttons */
+        .product-list button {
+            margin: 5px; /* Add margin around button */
+            padding: 10px; /* Add padding inside button */
+            border: none; /* Remove default border */
+            border-radius: 4px; /* Round corners of the border */
+            background-color: #28a745; /* Set background color */
+            color: white; /* Set text color */
+            cursor: pointer; /* Change cursor to pointer on hover */
+        }
+        /* Button hover effect */
+        .product-list button:hover {
+            background-color: #218838; /* Change background color on hover */
+        }
+        /* Styles for the selected product display */
+        #selected-product {
+            margin: 10px 0; /* Add margin above and below */
+            padding: 10px; /* Add padding inside */
+            border: 1px solid #ddd; /* Add border with color */
+            border-radius: 4px; /* Round corners of the border */
+            background-color: #fff; /* Set background color */
+        }
+        /* Styles for choices summary */
+        .choices-summary {
+            font-size: 20px; /* Set font size */
+            margin-bottom: 20px; /* Add space below the summary */
+        }
+        /* Styles for action buttons */
+        .action-button {
+            padding: 10px 20px; /* Add padding inside button */
+            border: none; /* Remove default border */
+            border-radius: 4px; /* Round corners of the border */
+            background-color: #007bff; /* Set background color */
+            color: white; /* Set text color */
+            cursor: pointer; /* Change cursor to pointer on hover */
+            margin-top: 20px; /* Add space above button */
+        }
+        /* Button hover effect */
+        .action-button:hover {
+            background-color: #0056b3; /* Change background color on hover */
+        }
+        /* Styles for cost and cash text */
+        .cost-text, .cash-text {
+            font-size: 24px; /* Set font size */
+            margin: 10px 0; /* Add margin above and below */
+        }
+        /* Styles for success message */
+        .success-text {
+            color: green; /* Set text color */
+            font-size: 50px; /* Set font size */
+        }
+        /* Center text alignment */
+        .centered-text {
+            text-align: center; /* Center text horizontally */
+        }
+        /* Hidden elements */
+        .hidden {
+            display: none; /* Hide element */
+        }
+        /* Styles for removed product text */
+        .removed-product {
+            color: red; /* Set text color */
+        }
+    </style>
+</head>
+<body>
+    <!-- Introduction section for user login -->
+    <div id="introduction" class="container">
+        <p class="welcome-text">Welcome to e-Store</p> <!-- Welcome message -->
+        <p>Please Login to join the store and enjoy purchasing from home.</p> <!-- Login instruction -->
+        <fieldset class="info-fieldset">
+            <legend>Information</legend> <!-- Fieldset legend -->
+            <label for="name">Name:</label> <!-- Label for name input -->
+            <input type="text" id="name"> <!-- Name input field -->
+            <button onclick="store.showName()">Forget name</button> <!-- Button to show stored name -->
+            <br>
+            <label for="password">Password:</label> <!-- Label for password input -->
+            <input type="password" id="password"> <!-- Password input field -->
+            <button onclick="store.showPassword()">Forget password</button> <!-- Button to show stored password -->
+            <br>
+            <label for="security-code">Code:</label> <!-- Label for security code input -->
+            <input type="text" id="security-code" placeholder="Security code below ↓"> <!-- Security code input field -->
+            <p>🅰️4️1️🅱️🅾️8️</p> <!-- Example security code -->
+            <br>
+            <button onclick="store.submit()">Submit</button> <!-- Button to submit information -->
+            <p id="notice" class="notice-text"></p> <!-- Area to display notices -->
+        </fieldset>
+    </div>
+
+    <!-- Product selection page -->
+    <div id="selecting_page" class="container hidden">
+        <h2 id="Cname"></h2> <!-- Display customer name -->
+        <p>Total cost: $<span id="total-cost">0</span></p> <!-- Display total cost -->
+        <details>
+            <summary class="choices-summary">
+                Number of choices: <span id="n_products">0</span> <!-- Display number of selected products -->
+            </summary>
+            <p id="selected-product">Your products → </p> <!-- Display selected products -->
+        </details>
+        <div class="product-list">
+            <button onclick="store.selectProduct('chips')">Chips - $5</button> <!-- Button to select chips -->
+            <button onclick="store.selectProduct('sooda')">Sooda - $7</button> <!-- Button to select sooda -->
+            <button onclick="store.selectProduct('chocolate')">Chocolate - $3</button> <!-- Button to select chocolate -->
+            <button onclick="store.selectProduct('lolipop')">Lolipop - $1</button> <!-- Button to select lolipop -->
+        </div>
+        <button class="action-button" onclick="store.confirmSelection()">Proceed to Payment</button> <!-- Button to proceed to payment -->
+    </div>
+
+    <!-- Payment page -->
+    <div id="payment" class="container hidden">
+        <p class="cost-text">Cost: $<span id="final-cost"></span></p> <!-- Display final cost -->
+        <p class="cash-text">Cash: $<span id="customerCash"></span></p> <!-- Display customer's cash -->
+        <button class="action-button" onclick="store.handlePayment()">Pay</button> <!-- Button to handle payment -->
+        <div id="removeProduct" class="hidden">
+            <p id="1" onclick="store.removeFromBasket(1)"></p> <!-- Area to display product 1 for removal -->
+            <p id="2" onclick="store.removeFromBasket(2)"></p> <!-- Area to display product 2 for removal -->
+            <p id="3" onclick="store.removeFromBasket(3)"></p> <!-- Area to display product 3 for removal -->
+            <p id="4" onclick="store.removeFromBasket(4)"></p> <!-- Area to display product 4 for removal -->
+        </div>
+        <p id="not-enough-warning" class="removed-product hidden">You don't have enough money. Please remove any product to reduce the cost</p> <!-- Warning if not enough money -->
+    </div>
+
+    <!-- Final success page -->
+    <div id="finish-page" class="container centered-text hidden">
+        <p class="success-text">Purchasing Successful</p> <!-- Success message -->
+    </div>
+
+    <script>
+        // Class representing a product with name and price
+        class Product {
+            constructor(name, price) {
+                this.name = name; // Product name
+                this.price = price; // Product price
+            }
+        }
+
+        // Class representing the store with methods for handling customer interactions
+        class Store {
+            constructor() {
+                // Customer information
+                this.customers = {
+                    name: "Arnorld", // Customer name
+                    password: "1234", // Customer password
+                    securityCode: "A41BO8" // Customer security code
+                };
+                // Product details with their prices
+                this.productDetails = {
+                    chips: new Product('Chips', 5), // Product: Chips
+                    sooda: new Product('Sooda', 7), // Product: Sooda
+                    chocolate: new Product('Chocolate', 3), // Product: Chocolate
+                    lolipop: new Product('Lolipop', 1) // Product: Lolipop
+                };
+                this.basket = []; // Array to hold selected products
+                this.cash = 0; // Customer's cash amount
+            }
+
+            // Method to display customer's name
+            showName() {
+                document.getElementById("name").value = ""; // Clear name input field
+                document.getElementById("name").placeholder = this.customers.name; // Set placeholder to customer's name
+            }
+
+            // Method to display customer's password
+            showPassword() {
+                document.getElementById("password").value = ""; // Clear password input field
+                document.getElementById("password").placeholder = this.customers.password; // Set placeholder to customer's password
+            }
+
+            // Method to submit the login information
+            submit() {
+                const name = document.getElementById("name").value; // Get name input value
+                const password = document.getElementById("password").value; // Get password input value
+                const securityCode = document.getElementById("security-code").value; // Get security code input value
+                const notice = document.getElementById("notice"); // Get notice element
+
+                // Check if entered name matches the stored name
+                if (name === this.customers.name) {
+                    // Check if entered password matches the stored password
+                    if (password === this.customers.password) {
+                        // Check if entered security code matches the stored code
+                        if (securityCode === this.customers.securityCode) {
+                            // Show the product selection page
+                            document.getElementById("introduction").classList.add("hidden"); // Hide introduction page
+                            document.getElementById("selecting_page").classList.remove("hidden"); // Show product selection page
+                            document.getElementById("Cname").textContent = this.customers.name; // Display customer's name on selection page
+                            notice.textContent = ""; // Clear any notice text
+                        } else {
+                            document.getElementById("security-code").value = ""; // Clear security code input field
+                            notice.textContent = "Wrong code. Please try again."; // Show error message for wrong code
+                        }
+                    } else {
+                        document.getElementById("password").value = ""; // Clear password input field
+                        notice.textContent = "Wrong password. Please try again."; // Show error message for wrong password
+                    }
+                } else {
+                    document.getElementById("name").value = ""; // Clear name input field
+                    notice.textContent = "Wrong name. Please try again."; // Show error message for wrong name
+                }
+            }
+
+            // Method to select a product
+            selectProduct(productName) {
+                // Add product to basket if it's not already included
+                if (!this.basket.includes(productName)) {
+                    this.basket.push(productName); // Add product to basket
+                    this.updateBasket(); // Update basket display
+                }
+            }
+
+            // Method to update basket display
+            updateBasket() {
+                const selectedProductElement = document.getElementById("selected-product"); // Get selected product element
+                const totalCostElement = document.getElementById("total-cost"); // Get total cost element
+                const nProductsElement = document.getElementById("n_products"); // Get number of products element
+                // Update selected product display
+                selectedProductElement.textContent = "Your products → " + this.basket.map(name => this.productDetails[name].name).join(" | ");
+                // Update number of products and total cost
+                nProductsElement.textContent = this.basket.length;
+                totalCostElement.textContent = this.basket.reduce((sum, productName) => sum + this.productDetails[productName].price, 0);
+            }
+
+            // Method to confirm product selection and proceed to payment
+            confirmSelection() {
+                document.getElementById("selecting_page").classList.add("hidden"); // Hide product selection page
+                document.getElementById("payment").classList.remove("hidden"); // Show payment page
+                document.getElementById("final-cost").textContent = document.getElementById("total-cost").textContent; // Set final cost
+                this.cash = Math.floor(Math.random() * 16) + 1; // Generate random cash amount between 1 and 16
+                document.getElementById("customerCash").textContent = this.cash; // Display customer's cash
+                this.updateRemoveProductList(); // Update remove product list
+            }
+
+            // Method to update the list of products that can be removed
+            updateRemoveProductList() {
+                for (let i = 1; i <= 4; i++) {
+                    document.getElementById(i).textContent = (this.basket[i - 1] ? this.productDetails[this.basket[i - 1]].name : ""); // Update product display for removal
+                }
+            }
+
+            // Method to remove a product from the basket
+            removeFromBasket(index) {
+                const product = this.productDetails[this.basket[index - 1]]; // Get product to remove
+                document.getElementById(index).textContent = ""; // Clear product display
+                document.getElementById(index).classList.add("removed-product"); // Add removed product styling
+                document.getElementById("final-cost").textContent = parseFloat(document.getElementById("final-cost").textContent) - product.price; // Update final cost
+            }
+
+            // Method to handle payment
+            handlePayment() {
+                const finalCost = parseFloat(document.getElementById("final-cost").textContent); // Get final cost
+                // Check if customer's cash is sufficient
+                if (this.cash >= finalCost) {
+                    document.getElementById("payment").classList.add("hidden"); // Hide payment page
+                    document.getElementById("finish-page").classList.remove("hidden"); // Show success page
+                } else {
+                    document.getElementById("removeProduct").classList.remove("hidden"); // Show remove product options
+                    document.getElementById("not-enough-warning").classList.remove("hidden"); // Show warning for insufficient funds
+                }
+            }
+        }
+
+        // Create an instance of the Store class
+        const store = new Store();
+    </script>
+</body>
+</html>
